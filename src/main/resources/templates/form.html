@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Process</title>
+</head>
+<body>
+<form action="#" method="post" th:action="@{/}" th:object="${form}">
+    <label for="name">Name:</label><br>
+    <input id="name" th:field="*{name}" type="text"><br>
+    <label for="descr">Descr:</label><br>
+    <input id="descr" th:field="*{descr}" type="text"><br>
+    <label for="start">Start:</label><br>
+    <input id="start" th:field="*{start}" type="number"><br>
+    <label for="count">Count:</label><br>
+    <input id="count" th:field="*{count}" type="number"><br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
