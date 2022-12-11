@@ -6,19 +6,21 @@ import org.springframework.stereotype.Component;
 import ru.timurrin.crestwave.task.config.Config;
 import ru.timurrin.crestwave.task.form.FormDto;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 @Component
 public class Process {
-    @Autowired
-    private Config config;
+    private final Config config;
 
-    public void run(FormDto formDto) {
+    @Autowired
+    Process(Config config) {
+        this.config = config;
+    }
+
+    public String run(FormDto formDto) {
         Gson gson = new Gson();
 
         ProcessDto processDto = new ProcessDto();
@@ -38,12 +40,9 @@ public class Process {
             OutputStream output = socket.getOutputStream();
             PrintWriter writer = new PrintWriter(output, true);
             writer.println(json);
-        } catch (UnknownHostException e) {
-            System.out.println("Server not found: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("I/O error: " + e.getMessage());
+            return null;
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            return "Error: " + e.getMessage();
         }
     }
 }
